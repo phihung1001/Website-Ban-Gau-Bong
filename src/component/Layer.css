@@ -1,0 +1,12 @@
+
+.each-slide-effect > div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-size: cover;
+	width: 100%;
+	aspect-ratio: 2.33;
+  }
+  .layer-site-slider {
+	margin-bottom: 1.25rem;
+  }

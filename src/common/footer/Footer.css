@@ -1,0 +1,105 @@
+.site-footer {
+    background-color: #fdafbc;
+    color: #fff;
+    border-top: 0.3125rem solid #02c4c1;
+    padding-top: 1.875rem;
+}
+.footer-container {
+    max-width: 960px;
+    width: 100%;
+    
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.footer-title {
+	font-size: 1rem;
+	text-transform: uppercase;
+	color: #fff;
+	display: block;
+	line-height: 1.25;
+	margin-bottom: 0.9375rem;
+}
+.site-footer .map {
+    padding-bottom: 15px;
+    border: none;
+
+}
+.footer-stores,
+.footer-socials,
+.footer-online,
+.footer-fanpage {
+	margin-bottom: 1.875rem;
+}
+.footer-stores li {
+	padding-left: 0.9375rem;
+	margin-bottom: 0.625rem;
+	position: relative;
+
+}
+.footer-stores li i {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.list-unstyled  {
+    padding-left: 0; 
+    list-style: none;
+    margin-block-start: 0;
+}
+.site-footer .row .col-menu {
+    max-width: 33.3333%;
+    width: 100%;
+    position: relative;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.site-footer .row {
+    display: flex;
+  
+    /* flex-wrap: wrap; */
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.site-footer a {
+	color: #fff;
+    font-style: italic;
+}
+.site-footer a:hover {
+	color: #333;
+}
+
+.footer-socials {
+    display: grid;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-left: -0.3125rem;
+    margin-right: -0.3125rem;
+    margin-bottom: 1.875rem;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+}
+
+.footer-socials li {
+    /* flex: 0 0 33.3333%;
+    max-width: 33.3333%; */
+   
+	padding-left: 0.3125rem;
+	padding-right: 0.3125rem;
+	margin-bottom: 0.625rem;
+}
+
+
+.footer-coppyright {
+    text-align: center;
+    border-top: 0.125rem solid #02c4c1;
+    padding: 0.9725rem 0 1px;
+}
+
+.site-footer .container .col-menu i{
+    transform: rotate(90deg);
+}
+.site-footer .container .col-menu .mb-3 i{
+    transform: rotate(0);
+}
