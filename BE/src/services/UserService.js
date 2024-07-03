@@ -1,61 +1,66 @@
+//Xử lí liên quan đến API
+
 const User = require("../models/UserModel")
 const bcrypt = require("bcrypt")
 const { genneralAccessToken, genneralRefreshToken } = require("./JwtService")
 
 const createUser = (newUser) => {
       return new Promise( async (resolve, reject) => {
-        const { name,email,password, confirmPassword, phone } = newUser
+        const { name,email,password, confirmPassword} = newUser
         try {
+           // Kiểm tra xem email đã tồn tại trong cơ sở dữ liệu chưa
             const checkUser = await User.findOne({
                  email: email
             })
             if(checkUser !==null) {
               resolve({
-                status :'Ok',
-                message: 'The email is already'
+                status :'ERR',
+                message: 'Email đã tồn tại trong hệ thống. Vui lòng nhập lại'
               })
             }
+                 // Mã hóa mật khẩu bằng bcrypt
             const hash = bcrypt.hashSync(password,10)
             console.log('hash', hash)
+             // Tạo người dùng mới trong cơ sở dữ liệu
             const createdUser = await User.create({
               name,
               email,
               password : hash,
-              phone
             })
-
+  // Nếu tạo người dùng thành công, trả về phản hồi thành công
             if(createdUser) {
               resolve({
                   status : 'OK',
-                  message :'SUCCESS',
+                  message :'Đăng kí thành công',
                   data : createdUser
               })
             }
         }
         catch(e){
+           // Nếu có lỗi, reject promise và trả về lỗi
             reject(e)
         }
       })
 }
 const loginUser = (userLogin) => {
   return new Promise( async (resolve, reject) => {
-    const { name,email,password, confirmPassword, phone } = userLogin
+    const { name ,password } = userLogin
     try {
         const checkUser = await User.findOne({
-             email: email
+             name: name
         })
         if(checkUser === null) {
           resolve({
-            status :'Ok',
-            message: 'The user is not defined'
+            status :'ERR',
+            message: 'Tên tài khoản bạn nhập không đúng. Vui lòng nhập lại'
           })
         }
         const comparePassword = bcrypt.compareSync(password,checkUser.password)
         //console.log('comparePassword',comparePassword);
         if(!comparePassword){
           resolve({
-               status: 'OK',
-               message: 'The password or use is incorrect'
+               status: 'ERR',
+               message: 'Bạn đã nhập sai mật khẩu. Vui lòng nhập lại'
           })
         }
 
@@ -70,7 +75,7 @@ const loginUser = (userLogin) => {
 
         resolve({
               status : 'OK',
-              message :'SUCCESS',
+              message :'Đăng nhập thành công. Vui lòng chờ chuyển hướng',
               access_token,
               refresh_token
         })
@@ -146,30 +151,26 @@ const getAllUser = () => {
     }
   })
 }
-
 const getDetailsUser = (id) => {
-  return new Promise( async (resolve, reject) => {
-    try {
-        const user = await User.findOne({
-          _id: id
-        })
-        console.log('user', user)
-        if(user === null) {
-          resolve({
-            status:"OK",
-            message:"The user is not defined" 
+  return new Promise(async (resolve, reject) => {
+      try {
+          const user = await User.findOne({
+              _id: id
           })
-        }
-        await User.findByIdAndDelete(id) 
-        resolve({
-              status : 'OK',
-              message :'Delete user SUCCESS',
+          if (user === null) {
+              resolve({
+                  status: 'ERR',
+                  message: 'The user is not defined'
+              })
+          }
+          resolve({
+              status: 'OK',
+              message: 'SUCESS',
               data: user
-        })
-    }
-    catch(e){
-        reject(e)
-    }
+          })
+      } catch (e) {
+          reject(e)
+      }
   })
 }
 

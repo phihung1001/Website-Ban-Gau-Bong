@@ -1,3 +1,5 @@
+//Xử lí liên quan đến API
+
 const Product = require("../models/ProductModel")
 const bcrypt = require("bcrypt")
 
